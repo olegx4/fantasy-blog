@@ -1,4 +1,4 @@
-package com.github.olegx4;
+package com.github.olegx4.hi;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

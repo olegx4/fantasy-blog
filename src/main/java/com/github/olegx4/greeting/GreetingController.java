@@ -1,4 +1,4 @@
-package com.github.olegx4;
+package com.github.olegx4.greeting;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
