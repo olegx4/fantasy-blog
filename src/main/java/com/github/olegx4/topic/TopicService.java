@@ -1,5 +1,6 @@
 package com.github.olegx4.topic;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,13 +10,23 @@ import java.util.List;
 @Service
 public class TopicService {
 
+    private final TopicRepository topicRepository;
+
     private final List<Topic> topics = new ArrayList<>(Arrays.asList(
             new Topic("spring", "Spring Boot", "Spring Boot Description"),
             new Topic("java", "Java 8", "Java 8 Description"),
             new Topic("csharp", "C#", "C# Description")
     ));
 
+    @Autowired
+    public TopicService(TopicRepository topicRepository) {
+        this.topicRepository = topicRepository;
+    }
+
     public List<Topic> getAllTopics() {
+        List<Topic> topics = new ArrayList<>();
+        topicRepository.findAll()
+                .forEach(topics::add);
         return topics;
     }
 
@@ -25,7 +36,7 @@ public class TopicService {
 
 
     public void addTopic(Topic topic) {
-        topics.add(topic);
+        topicRepository.save(topic);
     }
 
     public void updateTopic(String id, Topic topic) {

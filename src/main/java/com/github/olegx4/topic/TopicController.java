@@ -1,6 +1,7 @@
 package com.github.olegx4.topic;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +28,9 @@ public class TopicController {
     }
 
     @PostMapping
-    public void addTopic(@RequestBody Topic topic) {
+    public ResponseEntity<Void> addTopic(@RequestBody Topic topic) {
         topicService.addTopic(topic);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
