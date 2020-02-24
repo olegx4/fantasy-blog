@@ -6,32 +6,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("topics")
 public class TopicController {
 
-    @Autowired
-    TopicService topicService;
+    private final TopicService topicService;
 
-    @RequestMapping("/topics")
-    public List<Topic> getAllTopics(){
+    @Autowired
+    public TopicController(TopicService topicService) {
+        this.topicService = topicService;
+    }
+
+    @GetMapping
+    public List<Topic> getAllTopics() {
         return topicService.getAllTopics();
     }
 
-    @RequestMapping("/topics/{id}")
+    @GetMapping("/{id}")
     public Topic getTopicById(@PathVariable String id) {
         return topicService.getTopicById(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/topics")
+    @PostMapping
     public void addTopic(@RequestBody Topic topic) {
         topicService.addTopic(topic);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/topics/{id}")
+    @PutMapping("/{id}")
     public void updateTopic(@RequestBody Topic topic, @PathVariable String id) {
         topicService.updateTopic(id, topic);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/topics/{id}")
+    @DeleteMapping("/{id}")
     public void deleteTopic(@PathVariable String id) {
         topicService.deleteTopic(id);
     }
