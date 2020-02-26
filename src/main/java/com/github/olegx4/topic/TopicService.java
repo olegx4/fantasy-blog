@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TopicService {
@@ -30,10 +31,9 @@ public class TopicService {
         return topics;
     }
 
-    public Topic getTopicById(String id) {
-        return topics.stream().filter(t -> t.getId().equals(id)).findFirst().orElse(null);
+    public Optional<Topic> getTopicById(String id) {
+        return topicRepository.findById(id);
     }
-
 
     public void addTopic(Topic topic) {
         topicRepository.save(topic);

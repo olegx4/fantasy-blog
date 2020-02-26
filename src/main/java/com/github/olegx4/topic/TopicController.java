@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("topics")
@@ -23,7 +24,7 @@ public class TopicController {
     }
 
     @GetMapping("/{id}")
-    public Topic getTopicById(@PathVariable String id) {
+    public Optional<Topic> getTopicById(@PathVariable String id) {
         return topicService.getTopicById(id);
     }
 
