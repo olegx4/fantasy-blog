@@ -33,7 +33,9 @@ public class TopicService {
     }
 
     public void updateTopic(String id, Topic topic) {
-        topicRepository.save(topic);
+        if (topicRepository.existsById(id)) {
+            topicRepository.save(topic);
+        }
     }
 
     public void deleteTopic(String id) {
