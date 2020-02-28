@@ -29,13 +29,14 @@ public class Post {
 
 
     public Post() {
+        this.date = LocalDate.now();
     }
 
     public Post(String postId, String title, String message, String topicId) {
+        super();
         this.postId = postId;
         this.title = title;
         this.message = message;
-        this.date = LocalDate.now();
         this.topic = new Topic(topicId, "", "");
     }
 
