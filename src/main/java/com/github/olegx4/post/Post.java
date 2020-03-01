@@ -3,18 +3,20 @@ package com.github.olegx4.post;
 import com.github.olegx4.topic.Topic;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Post {
     @Id
-    private String postId;
+    @GeneratedValue
+    private Long postId;
     private String title;
     private String message;
     private String attachment;
-    private LocalDate date;
+    private LocalDateTime dateAndTime;
 
     @ManyToOne
     private Topic topic;
@@ -29,23 +31,14 @@ public class Post {
 
 
     public Post() {
-        this.date = LocalDate.now();
+        this.dateAndTime = LocalDateTime.now();
     }
 
-    public Post(String postId, String title, String message, String topicId) {
+    public Post(String title, String message, String topicId) {
         super();
-        this.postId = postId;
         this.title = title;
         this.message = message;
         this.topic = new Topic(topicId, "", "");
-    }
-
-    public String getPostId() {
-        return postId;
-    }
-
-    public void setPostId(String id) {
-        this.postId = id;
     }
 
     public String getTitle() {
@@ -72,11 +65,19 @@ public class Post {
         this.attachment = attachment;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public Long getPostId() {
+        return postId;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setPostId(Long postId) {
+        this.postId = postId;
+    }
+
+    public LocalDateTime getDateAndTime() {
+        return dateAndTime;
+    }
+
+    public void setDateAndTime(LocalDateTime dateAndTime) {
+        this.dateAndTime = dateAndTime;
     }
 }
