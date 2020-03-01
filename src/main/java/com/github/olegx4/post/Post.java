@@ -2,16 +2,13 @@ package com.github.olegx4.post;
 
 import com.github.olegx4.topic.Topic;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 public class Post {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
     private String title;
     private String message;
