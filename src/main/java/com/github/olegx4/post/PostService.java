@@ -17,10 +17,7 @@ public class PostService {
     }
 
     public List<Post> getAllPosts(String topicId) {
-        List<Post> posts = new ArrayList<>();
-        postRepository.findByTopicId(topicId)
-                .forEach(posts::add);
-        return posts;
+        return new ArrayList<>(postRepository.findByTopicId(topicId));
     }
 
     public void addPost(Post post) {
