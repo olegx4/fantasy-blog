@@ -1,4 +1,4 @@
-package com.github.olegx4;
+package com.github.blog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

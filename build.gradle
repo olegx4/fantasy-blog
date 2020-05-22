@@ -17,6 +17,7 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
 }
 
 dependencies {
@@ -31,6 +32,9 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    implementation "io.springfox:springfox-swagger-ui:$springfoxSwaggerVersion"
+    implementation "io.springfox:springfox-swagger2:$springfoxSwaggerVersion"
+    implementation "io.springfox:springfox-data-rest:$springfoxSwaggerVersion"
 }
 
 test {

@@ -1,13 +1,13 @@
-package com.github.olegx4.post;
+package com.github.blog.post;
 
-import com.github.olegx4.topic.Topic;
+import com.github.blog.topic.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("topics")
+@RequestMapping("api/topics")
 public class PostController {
     private final PostService postService;
 
@@ -16,7 +16,7 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping("{topicId}/posts")
+    @GetMapping("/{topicId}/posts")
     public List<Post> getAllPosts(@PathVariable String topicId) {
         return postService.getAllPosts(topicId);
     }

@@ -1,4 +1,4 @@
-package com.github.olegx4.topic;
+package com.github.blog.topic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

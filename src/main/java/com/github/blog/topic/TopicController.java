@@ -1,4 +1,4 @@
-package com.github.olegx4.topic;
+package com.github.blog.topic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("topics")
+@RequestMapping("api/topics")
 public class TopicController {
 
     private final TopicService topicService;

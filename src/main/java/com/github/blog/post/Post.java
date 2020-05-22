@@ -1,6 +1,6 @@
-package com.github.olegx4.post;
+package com.github.blog.post;
 
-import com.github.olegx4.topic.Topic;
+import com.github.blog.topic.Topic;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

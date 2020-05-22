@@ -1,4 +1,4 @@
-package com.github.olegx4.topic;
+package com.github.blog.topic;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

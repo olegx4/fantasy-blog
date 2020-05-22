@@ -1,4 +1,4 @@
-package com.github.olegx4.post;
+package com.github.blog.post;
 
 import org.springframework.data.repository.CrudRepository;
 

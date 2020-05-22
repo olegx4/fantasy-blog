@@ -1,4 +1,4 @@
-package com.github.olegx4.post;
+package com.github.blog.post;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
