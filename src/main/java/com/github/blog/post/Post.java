@@ -26,7 +26,6 @@ public class Post {
         this.topic = topic;
     }
 
-
     public Post() {
         this.dateAndTime = LocalDateTime.now();
     }

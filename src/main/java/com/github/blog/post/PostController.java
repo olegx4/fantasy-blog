@@ -26,6 +26,4 @@ public class PostController {
         post.setTopic(new Topic(topicId, "", ""));
         postService.addPost(post);
     }
-
-
 }
