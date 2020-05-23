@@ -24,7 +24,7 @@ public class TopicService {
         return topics;
     }
 
-    public Optional<Topic> getTopicById(String id) {
+    public Optional<Topic> getTopicById(Long id) {
         return topicRepository.findById(id);
     }
 
@@ -32,13 +32,13 @@ public class TopicService {
         topicRepository.save(topic);
     }
 
-    public void updateTopic(String id, Topic topic) {
+    public void updateTopic(Long id, Topic topic) {
         if (topicRepository.existsById(id)) {
             topicRepository.save(topic);
         }
     }
 
-    public void deleteTopic(String id) {
+    public void deleteTopic(Long id) {
         if (topicRepository.existsById(id)) {
             topicRepository.deleteById(id);
         }
