@@ -6,7 +6,6 @@ plugins {
 
 group = 'com.github.blog'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
 
 configurations {
     developmentOnly
@@ -32,9 +31,11 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+
     implementation "io.springfox:springfox-swagger-ui:$springfoxSwaggerVersion"
     implementation "io.springfox:springfox-swagger2:$springfoxSwaggerVersion"
     implementation "io.springfox:springfox-data-rest:$springfoxSwaggerVersion"
+    implementation 'org.flywaydb:flyway-core'
 }
 
 test {

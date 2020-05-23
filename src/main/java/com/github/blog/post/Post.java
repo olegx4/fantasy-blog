@@ -9,13 +9,14 @@ import java.time.LocalDateTime;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postId;
+    private Long id;
     private String title;
     private String message;
     private String attachment;
     private LocalDateTime dateAndTime;
 
     @ManyToOne
+    @JoinColumn(name = "topic_id")
     private Topic topic;
 
     public Topic getTopic() {
@@ -30,7 +31,7 @@ public class Post {
         this.dateAndTime = LocalDateTime.now();
     }
 
-    public Post(String title, String message, String topicId) {
+    public Post(String title, String message, Long topicId) {
         super();
         this.title = title;
         this.message = message;
@@ -61,12 +62,12 @@ public class Post {
         this.attachment = attachment;
     }
 
-    public Long getPostId() {
-        return postId;
+    public Long getId() {
+        return id;
     }
 
-    public void setPostId(Long postId) {
-        this.postId = postId;
+    public void setId(Long postId) {
+        this.id = postId;
     }
 
     public LocalDateTime getDateAndTime() {

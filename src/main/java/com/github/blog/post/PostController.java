@@ -16,13 +16,13 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping("/{topicId}/posts")
-    public List<Post> getAllPosts(@PathVariable String topicId) {
-        return postService.getAllPosts(topicId);
+    @GetMapping("/posts")
+    public List<Post> getAllPosts() {
+        return postService.getAllPosts();
     }
 
     @PostMapping("/{topicId}/posts")
-    public void addPost(@RequestBody Post post, @PathVariable String topicId) {
+    public void addPost(@RequestBody Post post, @PathVariable Long topicId) {
         post.setTopic(new Topic(topicId, "", ""));
         postService.addPost(post);
     }

@@ -3,7 +3,6 @@ package com.github.blog.post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,8 +15,8 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public List<Post> getAllPosts(String topicId) {
-        return new ArrayList<>(postRepository.findByTopicId(topicId));
+    public List<Post> getAllPosts() {
+        return postRepository.findAll();
     }
 
     public void addPost(Post post) {
