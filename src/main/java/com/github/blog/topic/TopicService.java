@@ -1,11 +1,11 @@
 package com.github.blog.topic;
 
+import com.github.blog.error.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TopicService {
@@ -17,15 +17,19 @@ public class TopicService {
         this.topicRepository = topicRepository;
     }
 
-    public List<Topic> getAllTopics() {
-        List<Topic> topics = new ArrayList<>();
-        topicRepository.findAll()
-                .forEach(topics::add);
-        return topics;
+    public List<TopicDto> getAllTopics() {
+        return topicRepository
+                .findAll()
+                .stream()
+                .map(TopicDto::new)
+                .collect(Collectors.toList());
     }
 
-    public Optional<Topic> getTopicById(Long id) {
-        return topicRepository.findById(id);
+    public TopicDto getTopicById(Long id) {
+        return topicRepository
+                .findById(id)
+                .map(TopicDto::new)
+                .orElseThrow(() -> new NotFoundException("Topic with ID " + id + " not found"));
     }
 
     public void addTopic(Topic topic) {

@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/topics")
@@ -19,13 +18,13 @@ public class TopicController {
     }
 
     @GetMapping
-    public List<Topic> getAllTopics() {
-        return topicService.getAllTopics();
+    public ResponseEntity<List<TopicDto>> getAllTopics() {
+        return ResponseEntity.ok(topicService.getAllTopics());
     }
 
     @GetMapping("/{id}")
-    public Optional<Topic> getTopicById(@PathVariable Long id) {
-        return topicService.getTopicById(id);
+    public ResponseEntity<TopicDto> getTopicById(@PathVariable Long id) {
+        return ResponseEntity.ok(topicService.getTopicById(id));
     }
 
     @PostMapping
