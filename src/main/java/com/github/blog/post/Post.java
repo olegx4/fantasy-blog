@@ -14,6 +14,7 @@ public class Post {
     private String message;
     private String attachment;
     private LocalDateTime dateAndTime;
+    private Boolean isDeleted = false;
 
     @ManyToOne
     @JoinColumn(name = "topic_id")
@@ -76,5 +77,13 @@ public class Post {
 
     public void setDateAndTime(LocalDateTime dateAndTime) {
         this.dateAndTime = dateAndTime;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 }

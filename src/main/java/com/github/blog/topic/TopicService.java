@@ -1,13 +1,19 @@
 package com.github.blog.topic;
 
 import com.github.blog.error.NotFoundException;
+import com.github.blog.topic.dto.TopicDto;
+import com.github.blog.topic.dto.command.TopicCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.apache.commons.lang3.BooleanUtils.isFalse;
+
 @Service
+@Transactional
 public class TopicService {
 
     private final TopicRepository topicRepository;
@@ -21,6 +27,7 @@ public class TopicService {
         return topicRepository
                 .findAll()
                 .stream()
+                .filter(topic -> isFalse(topic.getDeleted()))
                 .map(TopicDto::new)
                 .collect(Collectors.toList());
     }
@@ -32,19 +39,35 @@ public class TopicService {
                 .orElseThrow(() -> new NotFoundException("Topic with ID " + id + " not found"));
     }
 
-    public void addTopic(Topic topic) {
-        topicRepository.save(topic);
+    public TopicDto addTopic(TopicCommand command) {
+        Topic topic = commandToTopic(command);
+        return new TopicDto(topicRepository.save(topic));
     }
 
-    public void updateTopic(Long id, Topic topic) {
-        if (topicRepository.existsById(id)) {
-            topicRepository.save(topic);
-        }
+    public TopicDto updateTopic(Long id, TopicCommand command) {
+        return new TopicDto(topicRepository
+                .findByIdAndIsDeletedFalse(id)
+                .map(topic -> updateTargetTopic(command, topic))
+                .orElseThrow(() -> new NotFoundException("Topic with ID " + id + " not found")));
     }
 
     public void deleteTopic(Long id) {
-        if (topicRepository.existsById(id)) {
-            topicRepository.deleteById(id);
-        }
+        topicRepository.findByIdAndIsDeletedFalse(id)
+                .ifPresentOrElse(topic -> topic.setDeleted(true), () -> {
+                    throw new NotFoundException("Topic with ID " + id + " not found");
+                });
+    }
+
+    private Topic updateTargetTopic(TopicCommand command, Topic targetTopic) {
+        targetTopic.setName(command.getName());
+        targetTopic.setDescription(command.getDescription());
+        return targetTopic;
+    }
+
+    private Topic commandToTopic(TopicCommand command) {
+        Topic topic = new Topic();
+        topic.setName(command.getName());
+        topic.setDescription(command.getDescription());
+        return topic;
     }
 }

@@ -13,6 +13,7 @@ public class Topic {
     private Long id;
     private String name;
     private String description;
+    private Boolean isDeleted = false;
 
     public Topic() {
     }
@@ -41,5 +42,13 @@ public class Topic {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 }

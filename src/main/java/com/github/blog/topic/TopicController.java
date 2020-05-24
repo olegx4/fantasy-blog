@@ -1,9 +1,13 @@
 package com.github.blog.topic;
 
+import com.github.blog.topic.dto.TopicDto;
+import com.github.blog.topic.dto.command.TopicCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,18 +32,18 @@ public class TopicController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addTopic(@RequestBody Topic topic) {
-        topicService.addTopic(topic);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<TopicDto> addTopic(@Valid @RequestBody TopicCommand command) {
+        return new ResponseEntity<>(topicService.addTopic(command), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public void updateTopic(@RequestBody Topic topic, @PathVariable Long id) {
-        topicService.updateTopic(id, topic);
+    public ResponseEntity<TopicDto> updateTopic(@RequestBody TopicCommand command, @PathVariable Long id) {
+        return ResponseEntity.ok(topicService.updateTopic(id, command));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTopic(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTopic(@PathVariable Long id) {
         topicService.deleteTopic(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
