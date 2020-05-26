@@ -6,6 +6,8 @@ import com.github.blog.topic.dto.TopicDto;
 import java.time.LocalDateTime;
 
 public class PostDto {
+
+    private Long id;
     private String title;
     private String message;
     private String attachment;
@@ -13,11 +15,16 @@ public class PostDto {
     private TopicDto topic;
 
     public PostDto(Post post) {
+        this.id = post.getId();
         this.title = post.getTitle();
         this.message = post.getMessage();
         this.attachment = post.getAttachment();
         this.dateAndTime = post.getDateAndTime();
         this.topic = new TopicDto(post.getTopic());
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getTitle() {
