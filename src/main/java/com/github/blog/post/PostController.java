@@ -1,7 +1,10 @@
 package com.github.blog.post;
 
-import com.github.blog.topic.Topic;
+import com.github.blog.post.dto.PostDto;
+import com.github.blog.post.dto.command.PostCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +20,12 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public List<Post> getAllPosts() {
-        return postService.getAllPosts();
+    public ResponseEntity<List<PostDto>> getAllPosts() {
+        return ResponseEntity.ok(postService.getAllPosts());
     }
 
     @PostMapping("/{topicId}/posts")
-    public void addPost(@RequestBody Post post, @PathVariable Long topicId) {
-        post.setTopic(new Topic(topicId, "", ""));
-        postService.addPost(post);
+    public ResponseEntity<PostDto> addPost(@RequestBody PostCommand command) {
+        return new ResponseEntity<>(postService.addPost(command), HttpStatus.CREATED);
     }
 }
