@@ -7,11 +7,15 @@ import com.github.blog.topic.Topic;
 import com.github.blog.topic.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.apache.commons.lang3.BooleanUtils.isFalse;
+
 @Service
+@Transactional
 public class PostService {
 
     private final PostRepository postRepository;
@@ -27,6 +31,7 @@ public class PostService {
         return postRepository
                 .findAll()
                 .stream()
+                .filter(post -> isFalse(post.getDeleted()))
                 .map(PostDto::new)
                 .collect(Collectors.toList());
     }
@@ -46,8 +51,15 @@ public class PostService {
 
     public PostDto getPostById(Long id) {
         return postRepository
-                .getPostsById(id)
+                .getPostsByIdAndIsDeletedFalse(id)
                 .map(PostDto::new)
                 .orElseThrow(() -> new NotFoundException("Post with id " + id + " not found"));
+    }
+
+    public void deletePost(Long id) {
+        postRepository.getPostsByIdAndIsDeletedFalse(id)
+                .ifPresentOrElse(post -> post.setDeleted(true), () -> {
+                    throw new NotFoundException("Post with ID " + id + " not found");
+                });
     }
 }

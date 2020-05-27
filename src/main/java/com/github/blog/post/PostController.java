@@ -33,4 +33,10 @@ public class PostController {
     public ResponseEntity<PostDto> addPost(@RequestBody PostCommand command) {
         return new ResponseEntity<>(postService.addPost(command), HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/posts/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
+        postService.deletePost(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
