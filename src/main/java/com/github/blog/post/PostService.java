@@ -37,29 +37,44 @@ public class PostService {
     }
 
     public PostDto addPost(PostCommand command) {
-        Post post = new Post();
-        Topic topic = topicRepository
-                .findByIdAndIsDeletedFalse(command.getTopicId())
-                .orElseThrow(() -> new NotFoundException("Topic with id " + command.getTopicId() + " not found"));
-        post.setAttachment(command.getAttachment());
-        post.setDateAndTime(command.getDateAndTime());
-        post.setMessage(command.getMessage());
-        post.setTitle(command.getTitle());
-        post.setTopic(topic);
+        Post post = new Post(command);
+        post.setTopic(getTopicById(command.getTopicId()));
         return new PostDto(postRepository.save(post));
+    }
+
+    private Topic getTopicById(Long id) {
+        return topicRepository
+                .findByIdAndIsDeletedFalse(id)
+                .orElseThrow(() -> new NotFoundException("Topic with id " + id + " not found"));
     }
 
     public PostDto getPostById(Long id) {
         return postRepository
-                .getPostsByIdAndIsDeletedFalse(id)
+                .findPostByIdAndIsDeletedFalse(id)
                 .map(PostDto::new)
                 .orElseThrow(() -> new NotFoundException("Post with id " + id + " not found"));
     }
 
     public void deletePost(Long id) {
-        postRepository.getPostsByIdAndIsDeletedFalse(id)
+        postRepository.findPostByIdAndIsDeletedFalse(id)
                 .ifPresentOrElse(post -> post.setDeleted(true), () -> {
                     throw new NotFoundException("Post with ID " + id + " not found");
                 });
+    }
+
+    public PostDto updatePost(Long id, PostCommand command) {
+        return new PostDto(postRepository
+                .findPostByIdAndIsDeletedFalse(id)
+                .map(post -> updateTargetPost(command, post))
+                .orElseThrow(() -> new NotFoundException("Post with ID " + id + " not found")));
+    }
+
+    private Post updateTargetPost(PostCommand command, Post targetPost) {
+        targetPost.setTitle(command.getTitle());
+        targetPost.setMessage(command.getMessage());
+        targetPost.setAttachment(command.getAttachment());
+        targetPost.setDateAndTime(command.getDateAndTime());
+        targetPost.setTopic(getTopicById(command.getTopicId()));
+        return targetPost;
     }
 }

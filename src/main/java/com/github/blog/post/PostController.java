@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,8 +31,13 @@ public class PostController {
     }
 
     @PostMapping("/{topicId}/posts")
-    public ResponseEntity<PostDto> addPost(@RequestBody PostCommand command) {
+    public ResponseEntity<PostDto> addPost(@Valid @RequestBody PostCommand command) {
         return new ResponseEntity<>(postService.addPost(command), HttpStatus.CREATED);
+    }
+
+    @PutMapping("posts/{id}")
+    public ResponseEntity<PostDto> updatePost(@Valid @RequestBody PostCommand command, @PathVariable Long id) {
+        return ResponseEntity.ok(postService.updatePost(id, command));
     }
 
     @DeleteMapping("/posts/{id}")

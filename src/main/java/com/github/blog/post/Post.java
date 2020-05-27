@@ -1,9 +1,10 @@
 package com.github.blog.post;
 
+import com.github.blog.post.dto.command.PostCommand;
 import com.github.blog.topic.Topic;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
 public class Post {
@@ -13,7 +14,7 @@ public class Post {
     private String title;
     private String message;
     private String attachment;
-    private LocalDateTime dateAndTime;
+    private Instant dateAndTime;
     private Boolean isDeleted = false;
 
     @ManyToOne
@@ -29,14 +30,13 @@ public class Post {
     }
 
     public Post() {
-        this.dateAndTime = LocalDateTime.now();
     }
 
-    public Post(String title, String message, Long topicId) {
-        super();
-        this.title = title;
-        this.message = message;
-        this.topic = new Topic(topicId, "", "");
+    public Post(PostCommand command) {
+        this.title = command.getTitle();
+        this.message = command.getMessage();
+        this.attachment = command.getTitle();
+        this.dateAndTime = command.getDateAndTime();
     }
 
     public String getTitle() {
@@ -71,11 +71,11 @@ public class Post {
         this.id = postId;
     }
 
-    public LocalDateTime getDateAndTime() {
+    public Instant getDateAndTime() {
         return dateAndTime;
     }
 
-    public void setDateAndTime(LocalDateTime dateAndTime) {
+    public void setDateAndTime(Instant dateAndTime) {
         this.dateAndTime = dateAndTime;
     }
 

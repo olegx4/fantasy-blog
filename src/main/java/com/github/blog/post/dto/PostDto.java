@@ -3,7 +3,7 @@ package com.github.blog.post.dto;
 import com.github.blog.post.Post;
 import com.github.blog.topic.dto.TopicDto;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public class PostDto {
 
@@ -11,7 +11,7 @@ public class PostDto {
     private String title;
     private String message;
     private String attachment;
-    private LocalDateTime dateAndTime;
+    private Instant dateAndTime;
     private TopicDto topic;
 
     public PostDto(Post post) {
@@ -39,7 +39,7 @@ public class PostDto {
         return attachment;
     }
 
-    public LocalDateTime getDateAndTime() {
+    public Instant getDateAndTime() {
         return dateAndTime;
     }
 

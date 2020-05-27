@@ -2,7 +2,7 @@ package com.github.blog.post.dto.command;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public class PostCommand {
 
@@ -12,7 +12,7 @@ public class PostCommand {
     private String message;
     private String attachment;
     @NotNull
-    private LocalDateTime dateAndTime;
+    private Instant dateAndTime;
     @NotNull
     private Long topicId;
 
@@ -40,11 +40,11 @@ public class PostCommand {
         this.attachment = attachment;
     }
 
-    public LocalDateTime getDateAndTime() {
+    public Instant getDateAndTime() {
         return dateAndTime;
     }
 
-    public void setDateAndTime(LocalDateTime dateAndTime) {
+    public void setDateAndTime(Instant dateAndTime) {
         this.dateAndTime = dateAndTime;
     }
 
