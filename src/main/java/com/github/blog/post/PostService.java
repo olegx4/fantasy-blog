@@ -43,4 +43,11 @@ public class PostService {
         post.setTopic(topic);
         return new PostDto(postRepository.save(post));
     }
+
+    public PostDto getPostById(Long id) {
+        return postRepository
+                .getPostsById(id)
+                .map(PostDto::new)
+                .orElseThrow(() -> new NotFoundException("Post with id " + id + " not found"));
+    }
 }
