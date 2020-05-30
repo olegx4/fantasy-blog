@@ -10,3 +10,5 @@ spring:
       ddl-auto: validate
   flyway:
     out-of-order: true
+server:
+  port: 8080
