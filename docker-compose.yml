@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+  springapp:
+    build: ""
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://blogdb:5432/blog
+    ports:
+      - 8000:8080
+    depends_on:
+      - blogdb
+  blogdb:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: blog
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    volumes:
+      - "./blog-db:/var/lib/postgresql/data"
+    ports:
+      - 5432:5432
