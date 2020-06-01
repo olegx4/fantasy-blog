@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  springapp:
+    build: .
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://blogdb:5432/blog
+    ports:
+      - 8000:8080
+    networks:
+      - default
+networks:
+  default:
+    external:
+      name: fantasyblog_blog-db-network
