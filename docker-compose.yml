@@ -2,6 +2,7 @@ version: '3.7'
 services:
   blogdb:
     image: postgres
+    container_name: blog-db
     restart: always
     environment:
       POSTGRES_DB: blog
