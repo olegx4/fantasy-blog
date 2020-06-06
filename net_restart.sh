@@ -1,4 +1,5 @@
 docker-compose down
+docker pull olegx4/f-b-app:0.0.1
 docker stop f-b-app
 docker rm f-b-app
 docker-compose up -d
