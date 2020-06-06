@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
     volumes:
-      - "./blog-db:/var/lib/postgresql/data"
+      - "/blogdb:/var/lib/postgresql/data"
     ports:
       - 5432:5432
     networks:
