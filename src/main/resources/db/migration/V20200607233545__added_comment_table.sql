@@ -1,0 +1,10 @@
+CREATE TABLE comment
+(
+    id BIGINT GENERATED ALWAYS AS IDENTITY NOT NULL,
+    text TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    post_id BIGINT NOT NULL,
+    is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
+    PRIMARY KEY (id),
+    FOREIGN KEY (post_id) REFERENCES topic (id)
+);

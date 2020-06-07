@@ -1,18 +1,22 @@
 package com.github.blog.post.comment;
 
-import com.github.blog.topic.Topic;
+import com.github.blog.post.Post;
 
+import javax.persistence.*;
 import java.time.Instant;
-import java.util.Set;
 
+@Entity
 public class Comment {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String text;
     private Instant createdAt;
-    private Topic topic;
-    private Set<Comment> comment;
     private Boolean isDeleted = false;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Post post;
 
     public Comment() {
     }
@@ -39,30 +43,21 @@ public class Comment {
         return this;
     }
 
-    public Topic getTopic() {
-        return topic;
-    }
-
-    public Comment setTopic(Topic topic) {
-        this.topic = topic;
-        return this;
-    }
-
-    public Set<Comment> getComment() {
-        return comment;
-    }
-
-    public Comment setComment(Set<Comment> comment) {
-        this.comment = comment;
-        return this;
-    }
-
     public Boolean getDeleted() {
         return isDeleted;
     }
 
     public Comment setDeleted(Boolean deleted) {
         isDeleted = deleted;
+        return this;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public Comment setPost(Post post) {
+        this.post = post;
         return this;
     }
 }

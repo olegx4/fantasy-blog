@@ -1,10 +1,13 @@
 package com.github.blog.post;
 
+import com.github.blog.post.comment.Comment;
 import com.github.blog.post.dto.command.PostCommand;
 import com.github.blog.topic.Topic;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Post {
@@ -17,6 +20,13 @@ public class Post {
     private Instant dateAndTime;
     private Boolean isDeleted = false;
 
+    @OneToMany(
+            mappedBy = "post",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private final List<Comment> comments = new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "topic_id")
     private Topic topic;
@@ -27,6 +37,20 @@ public class Post {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+        comment.setPost(this);
+    }
+
+    public void removeComment(Comment comment) {
+        comments.remove(comment);
+        comment.setPost(null);
+    }
+
+    public List<Comment> getComments() {
+        return comments;
     }
 
     public Post() {
