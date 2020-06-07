@@ -1,7 +1,9 @@
-version: '3.7'
+version: '3.8'
 services:
   springapp:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile-alternate
     container_name: blog-app
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://blogdb:5432/blog
