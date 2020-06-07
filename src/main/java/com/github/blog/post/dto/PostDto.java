@@ -1,9 +1,12 @@
 package com.github.blog.post.dto;
 
 import com.github.blog.post.Post;
+import com.github.blog.post.comment.dto.CommentDto;
 import com.github.blog.topic.dto.TopicDto;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PostDto {
 
@@ -14,6 +17,12 @@ public class PostDto {
     private Instant dateAndTime;
     private TopicDto topic;
 
+    public List<CommentDto> getComments() {
+        return comments;
+    }
+
+    private List<CommentDto> comments;
+
     public PostDto(Post post) {
         this.id = post.getId();
         this.title = post.getTitle();
@@ -21,6 +30,10 @@ public class PostDto {
         this.attachment = post.getAttachment();
         this.dateAndTime = post.getDateAndTime();
         this.topic = new TopicDto(post.getTopic());
+        this.comments = post.getComments()
+                .stream()
+                .map(CommentDto::new)
+                .collect(Collectors.toList());
     }
 
     public Long getId() {
