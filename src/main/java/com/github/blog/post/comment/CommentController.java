@@ -8,24 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/posts/comments")
 public class CommentController {
-    private final CommentsRepository commentsRepository;
+    private final CommentService commentService;
 
     @Autowired
-    public CommentController(CommentsRepository commentsRepository) {
-        this.commentsRepository = commentsRepository;
+    public CommentController(CommentService commentService) {
+        this.commentService = commentService;
     }
 
     @GetMapping
     public ResponseEntity<List<CommentDto>> getAllComments() {
-        return ResponseEntity.ok(commentsRepository
-                .findAll()
-                .stream()
-                .map(CommentDto::new)
-                .collect(Collectors.toList()));
+        return ResponseEntity.ok(commentService.getAll());
     }
 }
