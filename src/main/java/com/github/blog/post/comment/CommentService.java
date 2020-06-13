@@ -41,6 +41,6 @@ public class CommentService {
                 .setCreatedAt(command.getDateAndTime())
                 .setPost(post);
         post.addComment(comment);
-        return new CommentDto(comment);
+        return new CommentDto(commentsRepository.save(comment));
     }
 }
