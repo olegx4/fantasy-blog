@@ -26,7 +26,7 @@ public class CommentService {
 
     public List<CommentDto> getAll() {
         return commentsRepository
-                .findAll()
+                .findAllByIsDeletedFalse()
                 .stream()
                 .map(CommentDto::new)
                 .collect(Collectors.toList());
@@ -34,9 +34,7 @@ public class CommentService {
 
     @Transactional
     public CommentDto addComment(Long postId, CommentCommand command) {
-        Post post = postRepository
-                .findPostByIdAndIsDeletedFalse(postId)
-                .orElseThrow(() -> new NotFoundException("Post with id " + postId + " not found"));
+        Post post = getPostById(postId);
         Comment comment = new Comment()
                 .setText(command.getText())
                 .setCreatedAt(command.getDateAndTime())
@@ -47,7 +45,7 @@ public class CommentService {
 
     @Transactional
     public CommentDto updateComment(Long commentId, CommentUpdateCommand command) {
-        return commentsRepository.findById(commentId)
+        return commentsRepository.findByIdAndIsDeletedFalse(commentId)
                 .map(comment -> comment.setText(command.getText()))
                 .map(CommentDto::new)
                 .orElseThrow(() -> new NotFoundException("Comment with id " + commentId + " not found"));
@@ -56,8 +54,21 @@ public class CommentService {
     @Transactional
     public void deleteComment(Long id) {
         commentsRepository.findByIdAndIsDeletedFalse(id)
-                .ifPresentOrElse(comment -> comment.setDeleted(true), () -> {
+                .ifPresentOrElse(commentsRepository::delete, () -> {
                     throw new NotFoundException(("Comment with id " + id + " not found"));
                 });
+    }
+
+    @Transactional
+    public void deletePostComments(Long postId) {
+        Post post = getPostById(postId);
+        List<Comment> comments = commentsRepository.findAllByPostIdAndIsDeletedFalse(postId)
+                .orElseThrow(() -> new NotFoundException("Comments not found"));
+        comments.forEach(post::removeComment);
+    }
+
+    private Post getPostById(Long postId) {
+        return postRepository.findPostByIdAndIsDeletedFalse(postId)
+                .orElseThrow(() -> new NotFoundException("Post with id " + postId + " not found"));
     }
 }
