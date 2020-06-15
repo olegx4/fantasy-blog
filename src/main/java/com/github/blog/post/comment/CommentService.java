@@ -5,6 +5,7 @@ import com.github.blog.post.Post;
 import com.github.blog.post.PostRepository;
 import com.github.blog.post.comment.dto.CommentDto;
 import com.github.blog.post.comment.dto.command.CommentCommand;
+import com.github.blog.post.comment.dto.command.CommentUpdateCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +43,13 @@ public class CommentService {
                 .setPost(post);
         post.addComment(comment);
         return new CommentDto(commentsRepository.save(comment));
+    }
+
+    @Transactional
+    public CommentDto updateComment(Long commentId, CommentUpdateCommand command) {
+        return commentsRepository.findById(commentId)
+                .map(comment -> comment.setText(command.getText()))
+                .map(CommentDto::new)
+                .orElseThrow(() -> new NotFoundException("Comment with id " + commentId + " not found"));
     }
 }

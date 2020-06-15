@@ -2,6 +2,7 @@ package com.github.blog.post.comment;
 
 import com.github.blog.post.comment.dto.CommentDto;
 import com.github.blog.post.comment.dto.command.CommentCommand;
+import com.github.blog.post.comment.dto.command.CommentUpdateCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +29,11 @@ public class CommentController {
     @PostMapping("/{postId}/comments")
     public ResponseEntity<CommentDto> addComment(@PathVariable Long postId, @Valid @RequestBody CommentCommand command) {
         return new ResponseEntity<>(commentService.addComment(postId, command), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/comments/{commentId}")
+    public ResponseEntity<CommentDto> updateComment(@PathVariable Long commentId,
+                                                    @Valid @RequestBody CommentUpdateCommand command) {
+        return ResponseEntity.ok(commentService.updateComment(commentId, command));
     }
 }
