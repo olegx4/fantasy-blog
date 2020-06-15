@@ -52,4 +52,12 @@ public class CommentService {
                 .map(CommentDto::new)
                 .orElseThrow(() -> new NotFoundException("Comment with id " + commentId + " not found"));
     }
+
+    @Transactional
+    public void deleteComment(Long id) {
+        commentsRepository.findByIdAndIsDeletedFalse(id)
+                .ifPresentOrElse(comment -> comment.setDeleted(true), () -> {
+                    throw new NotFoundException(("Comment with id " + id + " not found"));
+                });
+    }
 }
