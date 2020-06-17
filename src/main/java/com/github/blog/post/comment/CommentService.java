@@ -32,6 +32,12 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
+    public CommentDto getById(Long id) {
+        return commentsRepository.findByIdAndIsDeletedFalse(id)
+                .map(CommentDto::new)
+                .orElseThrow(() -> new NotFoundException("Comment with id " + id + " not found"));
+    }
+
     @Transactional
     public CommentDto addComment(Long postId, CommentCommand command) {
         Post post = getPostById(postId);
