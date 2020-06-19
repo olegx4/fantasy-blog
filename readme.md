@@ -18,3 +18,13 @@ Run images (**db** and **app**) with following parameters:
 
 Or you can simply run `net_restart.sh` in terminal (linux).
 App cannot work without db image.
+
+For opening swagger api - input in your browser:
+`localhost:8000/swagger-ui.html`
+
+If you want start app in Intellij Idea run in terminal command:
+
+`docker-compose up -d` for starting DB, after - start application
+
+Swagger will be available on:
+`localhost:8080/swagger-ui.html`
