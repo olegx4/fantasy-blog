@@ -37,6 +37,7 @@ dependencies {
     implementation "io.springfox:springfox-data-rest:$springfoxSwaggerVersion"
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.apache.commons:commons-lang3'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.3.1.RELEASE'
 }
 
 test {
