@@ -17,6 +17,9 @@ Run images (**db** and **app**) with following parameters:
 `docker run -d --name f-b-app --network fantasyblog_blog-db-network -e DB_HOST=blogdb -e DB_PORT=5432  -p 8000:8080 --name f-b-app olegx4/f-b-app`
 
 Or you can simply run `net_restart.sh` in terminal (linux).
+Link to file "net_restart.sh":
+`https://github.com/olegx4/fantasy-blog/blob/master/net_restart.sh`
+
 App cannot work without db image.
 
 For opening swagger api - input in your browser:
