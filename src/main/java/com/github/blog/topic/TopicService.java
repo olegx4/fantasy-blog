@@ -4,6 +4,8 @@ import com.github.blog.error.NotFoundException;
 import com.github.blog.topic.dto.TopicDto;
 import com.github.blog.topic.dto.command.TopicCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +19,12 @@ import static org.apache.commons.lang3.BooleanUtils.isFalse;
 public class TopicService {
 
     private final TopicRepository topicRepository;
+    private final JavaMailSender javaMailSender;
 
     @Autowired
-    public TopicService(TopicRepository topicRepository) {
+    public TopicService(TopicRepository topicRepository, JavaMailSender javaMailSender) {
         this.topicRepository = topicRepository;
+        this.javaMailSender = javaMailSender;
     }
 
     public List<TopicDto> getAllTopics() {
@@ -69,5 +73,14 @@ public class TopicService {
         topic.setName(command.getName());
         topic.setDescription(command.getDescription());
         return topic;
+    }
+
+    void sendEmail() {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo("olegx4@ukr.net");
+        msg.setSubject("Test");
+        msg.setText("Topic created");
+
+        javaMailSender.send(msg);
     }
 }
