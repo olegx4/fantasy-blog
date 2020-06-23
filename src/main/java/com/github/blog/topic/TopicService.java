@@ -45,6 +45,7 @@ public class TopicService {
 
     public TopicDto addTopic(TopicCommand command) {
         Topic topic = commandToTopic(command);
+        sendEmail(topic.getName());
         return new TopicDto(topicRepository.save(topic));
     }
 
@@ -75,11 +76,11 @@ public class TopicService {
         return topic;
     }
 
-    void sendEmail() {
+    void sendEmail(String topicName) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo("olegx4@ukr.net");
-        msg.setSubject("Test");
-        msg.setText("Topic created");
+        msg.setSubject("New topic created");
+        msg.setText("Topic \"" + topicName + "\" created.");
 
         javaMailSender.send(msg);
     }
