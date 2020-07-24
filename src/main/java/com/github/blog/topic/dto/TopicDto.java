@@ -3,9 +3,9 @@ package com.github.blog.topic.dto;
 import com.github.blog.topic.Topic;
 
 public class TopicDto {
-    private Long id;
-    private String name;
-    private String description;
+    private final Long id;
+    private final String name;
+    private final String description;
 
     public TopicDto(Topic topic) {
         this.id = topic.getId();

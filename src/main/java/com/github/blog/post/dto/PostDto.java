@@ -10,18 +10,18 @@ import java.util.stream.Collectors;
 
 public class PostDto {
 
-    private Long id;
-    private String title;
-    private String message;
-    private String attachment;
-    private Instant dateAndTime;
-    private TopicDto topic;
+    private final Long id;
+    private final String title;
+    private final String message;
+    private final String attachment;
+    private final Instant dateAndTime;
+    private final TopicDto topic;
 
     public List<CommentDto> getComments() {
         return comments;
     }
 
-    private List<CommentDto> comments;
+    private final List<CommentDto> comments;
 
     public PostDto(Post post) {
         this.id = post.getId();
