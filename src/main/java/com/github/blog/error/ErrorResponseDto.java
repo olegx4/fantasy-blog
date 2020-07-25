@@ -1,8 +1,13 @@
 package com.github.blog.error;
 
-import lombok.Value;
-
-@Value
 public class ErrorResponseDto {
-    private String message;
+    private final String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public ErrorResponseDto(String message) {
+        this.message = message;
+    }
 }
