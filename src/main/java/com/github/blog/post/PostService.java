@@ -1,8 +1,6 @@
 package com.github.blog.post;
 
 import com.github.blog.error.NotFoundException;
-import com.github.blog.post.dto.PostDto;
-import com.github.blog.post.dto.command.PostCommand;
 import com.github.blog.topic.Topic;
 import com.github.blog.topic.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;

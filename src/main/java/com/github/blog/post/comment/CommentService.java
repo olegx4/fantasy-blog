@@ -3,9 +3,6 @@ package com.github.blog.post.comment;
 import com.github.blog.error.NotFoundException;
 import com.github.blog.post.Post;
 import com.github.blog.post.PostRepository;
-import com.github.blog.post.comment.dto.CommentDto;
-import com.github.blog.post.comment.dto.command.CommentCommand;
-import com.github.blog.post.comment.dto.command.CommentUpdateCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

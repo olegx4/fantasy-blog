@@ -1,7 +1,5 @@
 package com.github.blog.post;
 
-import com.github.blog.post.dto.PostDto;
-import com.github.blog.post.dto.command.PostCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

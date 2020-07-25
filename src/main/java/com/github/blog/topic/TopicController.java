@@ -1,7 +1,5 @@
 package com.github.blog.topic;
 
-import com.github.blog.topic.dto.TopicDto;
-import com.github.blog.topic.dto.command.TopicCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

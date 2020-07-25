@@ -1,6 +1,4 @@
-package com.github.blog.post.comment.dto;
-
-import com.github.blog.post.comment.Comment;
+package com.github.blog.post.comment;
 
 import java.time.Instant;
 

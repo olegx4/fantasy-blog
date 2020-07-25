@@ -1,4 +1,4 @@
-package com.github.blog.post.comment.dto.command;
+package com.github.blog.post.comment;
 
 import javax.validation.constraints.NotBlank;
 

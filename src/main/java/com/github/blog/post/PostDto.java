@@ -1,8 +1,7 @@
-package com.github.blog.post.dto;
+package com.github.blog.post;
 
-import com.github.blog.post.Post;
-import com.github.blog.post.comment.dto.CommentDto;
-import com.github.blog.topic.dto.TopicDto;
+import com.github.blog.post.comment.CommentDto;
+import com.github.blog.topic.TopicDto;
 
 import java.time.Instant;
 import java.util.List;

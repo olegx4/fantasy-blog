@@ -1,7 +1,6 @@
 package com.github.blog.post;
 
 import com.github.blog.post.comment.Comment;
-import com.github.blog.post.dto.command.PostCommand;
 import com.github.blog.topic.Topic;
 
 import javax.persistence.*;

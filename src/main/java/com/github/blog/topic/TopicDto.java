@@ -1,6 +1,4 @@
-package com.github.blog.topic.dto;
-
-import com.github.blog.topic.Topic;
+package com.github.blog.topic;
 
 public class TopicDto {
     private final Long id;

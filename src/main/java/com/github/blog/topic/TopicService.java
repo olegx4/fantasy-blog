@@ -1,8 +1,6 @@
 package com.github.blog.topic;
 
 import com.github.blog.error.NotFoundException;
-import com.github.blog.topic.dto.TopicDto;
-import com.github.blog.topic.dto.command.TopicCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
