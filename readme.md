@@ -18,7 +18,7 @@ Run images (**db** and **app**) with following parameters:
 
 Or you can simply run `net_restart.sh` in terminal (linux).
 Link to file "net_restart.sh":
-`https://github.com/olegx4/fantasy-blog/blob/master/net_restart.sh`
+`https://github.com/olegx4/fantasy-blog/blob/master/dev/net_restart.sh`
 
 App cannot work without db image.
 
