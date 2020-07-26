@@ -29,3 +29,5 @@ spring:
             trust: smtp.gmail.com
 server:
   port: 8080
+  servlet:
+    context-path: /api

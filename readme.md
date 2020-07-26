@@ -23,7 +23,7 @@ Link to file "net_restart.sh":
 App cannot work without db image.
 
 For opening swagger api - input in your browser:
-`localhost:8000/swagger-ui.html`
+`localhost:8000/api/swagger-ui.html`
 
 If you want start app in Intellij Idea run in terminal command:
 
