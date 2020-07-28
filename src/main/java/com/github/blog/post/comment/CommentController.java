@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/posts")
 public class CommentController {
     private final CommentService commentService;
 
@@ -18,34 +17,34 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/comments")
+    @GetMapping("/posts/comments")
     public ResponseEntity<List<CommentDto>> getAllComments() {
         return ResponseEntity.ok(commentService.getAll());
     }
 
-    @GetMapping("/comments/{id}")
+    @GetMapping("/posts/comments/{id}")
     public ResponseEntity<CommentDto> getById(@PathVariable Long id) {
         return ResponseEntity.ok(commentService.getById(id));
     }
 
-    @PostMapping("/{postId}/comments")
+    @PostMapping("/posts/{postId}/comments")
     public ResponseEntity<CommentDto> addComment(@PathVariable Long postId, @Valid @RequestBody CommentCommand command) {
         return new ResponseEntity<>(commentService.addComment(postId, command), HttpStatus.CREATED);
     }
 
-    @PutMapping("/comments/{id}")
+    @PutMapping("/posts/comments/{id}")
     public ResponseEntity<CommentDto> updateComment(@PathVariable Long id,
                                                     @Valid @RequestBody CommentUpdateCommand command) {
         return ResponseEntity.ok(commentService.updateComment(id, command));
     }
 
-    @DeleteMapping("/comments/{id}")
+    @DeleteMapping("/posts/comments/{id}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
         commentService.deleteComment(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @DeleteMapping("/{postId}/comments")
+    @DeleteMapping("/posts/{postId}/comments")
     public ResponseEntity<Void> deleteCommentByPostId(@PathVariable Long postId) {
         commentService.deletePostComments(postId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
